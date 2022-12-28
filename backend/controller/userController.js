@@ -58,4 +58,55 @@ export const login = async(req,res,next) => {
         return res.status(404).json({message:"Dang nhap khong thanh cong"});
     }
     return res.status(201).json({message:"Dang nhap thanh cong"});
-};
+}
+
+export const deleteUser = async(req, res, next) => {
+    const {email} = req.body;
+    let checkAvailedUser;
+    let checkDelete;
+    try{
+        checkAvailedUser = await users.findOne({email});
+    }catch(err){
+        return console.log(err);
+    }
+    if(!checkAvailedUser){
+        return res.status(404).json({message:"Nguoi dung khong ton tai"});
+    }
+
+    checkDelete = await users.deleteOne({email});
+
+    if(!checkDelete){
+        return res.status(404).json({message:"Xoa that bai"});
+    }
+    return res.status(201).json({message:"Xoa thanh cong"});
+
+}
+
+export const updateUser = async(req, res, next) =>{
+    const {email,avatar,name,status, password} = req.body;
+    let checkAvailedUser;
+    // kiem tra nguoi dung co ton tai hay khong truoc khi update
+    try{
+        checkAvailedUser = await users.findOne({email});
+    }catch(err){
+        return console.log(err);
+    }
+    if(!checkAvailedUser){
+        return res.status(404).json({message:"Nguoi dung khong ton tai"});
+    }
+    const hashPassword = bcrypt.hashSync(password);
+    const docUpdate = {
+        $set:{
+            name: name,
+            avatar: avatar,
+            status:status,
+            password: hashPassword
+        }
+    }
+
+    const result = await users.updateOne({email}, docUpdate);
+    if(!result){
+        return res.status(404).json({message:"Update that bai"});
+    }
+    return res.status(201).json({users});
+}
