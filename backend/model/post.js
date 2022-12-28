@@ -8,6 +8,16 @@ const postSchame = new schema({
     },
     describe:{
         type: String,
-        required: fase
+        required: false
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    user:{
+        type: String,
+        required: true,
     }
 });
+
+export default mongoose.model("post",postSchame);
