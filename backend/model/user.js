@@ -7,6 +7,10 @@ const userSchema = new schema({
         type: String,
         required: true
     },
+    username:{
+        type: String,
+        required: true
+    },
     email :{
         type: String,
         required: [true, 'Please input email'],
@@ -29,7 +33,12 @@ const userSchema = new schema({
         type: String,
         required: false,
         default: "active"
-    }
+    },
+    post:[{
+        type: mongoose.Types.ObjectId,
+        ref: "Post",
+        required: true
+    }]
 })
 
-export default mongoose.model("user", userSchema);
+export default mongoose.model("User", userSchema);

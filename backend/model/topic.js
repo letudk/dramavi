@@ -19,7 +19,12 @@ const topicSchema = new Schema({
         type: String,
         required: false,
         default: "https://i.imgur.com/Rrb7Tl3_d.png"
-    }
+    },
+    post:[{
+        type: mongoose.Types.ObjectId,
+        ref:"topic",
+        required: true
+    }]
 });
 
-export default mongoose.model("topic", topicSchema);
+export default mongoose.model("Topic", topicSchema);

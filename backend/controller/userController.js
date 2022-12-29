@@ -15,7 +15,7 @@ export const getAllUser = async(req,res, next) => {
 }
 
 export const signup = async(req, res, next) => {
-    const {name,email,password} = req.body;
+    const {name,email,password,username} = req.body;
     let checkAvailedUser ;
     try{
         checkAvailedUser = await users.findOne({email});
@@ -30,6 +30,8 @@ export const signup = async(req, res, next) => {
         name,
         email,
         password: hashPassword,
+        post:[],
+        username,
     });
     try{
         user.save();
