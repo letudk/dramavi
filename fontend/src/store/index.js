@@ -1,6 +1,6 @@
-import {configureStore, createrSlice} from "@reduxjs/toolkit";
+import { createSlice, configureStore } from '@reduxjs/toolkit'
 
-const authSlice = createrSlice({
+const authSlice = createSlice({
     name: 'login',
     initialState:{isLoggedIn: false},
     reducers:{
