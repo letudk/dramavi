@@ -4,8 +4,11 @@ import mongoose from "mongoose";
 import routesUser from "./router/userRouter.js";
 import routerTopic from './router/topicRouter.js';
 import routerPost from './router/postRouter.js';
+import cors from 'cors';
+
 const app = express();
 app.use(express.json());
+app.use(cors());
 const dotenv = env.config();
 const PORT = process.env.PORT || 5000;
 // router

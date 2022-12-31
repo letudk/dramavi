@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import post from '../model/post.js';
+// import post from '../model/post.js';
 import Posts from '../model/post.js';
 import User from '../model/user.js';
 // import Topic from '../model/topic.js';
